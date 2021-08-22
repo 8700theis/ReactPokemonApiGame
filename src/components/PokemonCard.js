@@ -70,7 +70,10 @@ class PokemonCard extends React.Component {
                         <h2>{this.state.name}</h2>
                     </section>
                     <section className='flip-card-back'>
-                        <button >Add to team</button>
+                        <img src={this.state.pokemon.imgSpriteBack} />
+                        <button className='flip-card-button' onClick={() => {
+                            this.props.onclick(this.state.pokemon);
+                        }}>Add to team</button>
                     </section>
                 </section>                
             </section>

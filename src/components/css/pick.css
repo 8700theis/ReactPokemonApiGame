@@ -5,7 +5,7 @@
 }
 
 .content-heading {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
 }
 
 .flip-card {
@@ -23,6 +23,12 @@
     transition: transform .6s;
     transform-style: preserve-3d;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.flip-card-button {
+    width: 100%;
+    padding: 0.5rem;
+    cursor: pointer;
 }
 
 .flip {
