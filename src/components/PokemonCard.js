@@ -11,13 +11,24 @@ class PokemonCard extends React.Component {
             moveThree: this.props.moveThree,
             moveFour: this.props.moveFour,
             pokemon: {},
-            isActive: false
+            isActive: false,
+            isClicked: false
         };
     }
 
     handleToggle = () => {
         this.setState({ isActive: !this.state.isActive });  
     };
+
+    handleClick = () => {
+        if(this.state.isClicked === false) {
+            this.setState({ isClicked: true });
+            this.props.onclick(this.state.pokemon);
+        } else {
+            this.setState({ isClicked: false });
+        }
+        
+    }
 
     componentDidMount() {
         axios.get(`https://pokeapi.co/api/v2/pokemon/${this.state.name}`)
@@ -63,7 +74,7 @@ class PokemonCard extends React.Component {
 
     render() {
         return(
-            <section className='flip-card' onMouseEnter={this.handleToggle} onMouseLeave={this.handleToggle}>
+            <section className={`flip-card ${this.state.isClicked ? "card-opacity" : ""}`} onMouseEnter={this.handleToggle} onMouseLeave={this.handleToggle}>
                 <section className={`flip-card-inner ${this.state.isActive ? "flip" : ""}`}>
                     <section className='flip-card-front'>
                         <img src={this.state.pokemon.imgSprite} />
@@ -71,9 +82,7 @@ class PokemonCard extends React.Component {
                     </section>
                     <section className='flip-card-back'>
                         <img src={this.state.pokemon.imgSpriteBack} />
-                        <button className='flip-card-button' onClick={() => {
-                            this.props.onclick(this.state.pokemon);
-                        }}>Add to team</button>
+                        <button className='flip-card-button' onClick={this.handleClick}>{this.state.isClicked ? "Remove" : "Add to team"}</button>
                     </section>
                 </section>                
             </section>
