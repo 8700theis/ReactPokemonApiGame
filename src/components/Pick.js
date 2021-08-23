@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PokemonCard from './PokemonCard';
 import './css/pick.css';
 
@@ -10,6 +10,23 @@ const Pick = () => {
     const handleHistory = () => {
         history.push('/fight');
     }
+
+    const handleClick = () => {
+        if(pokemonList.length > 0) {
+            localStorage.setItem("trainer-pokemon-list", JSON.stringify(pokemonList));
+            handleHistory();
+        }
+        console.log(pokemonList);
+    }
+
+    useEffect(() => {
+        if(pokemonList.length === 6) {
+            const cards = document.querySelectorAll('.flip-card');
+            cards.forEach(card => {
+                card.classList.add('card-opacity');
+            });
+        }
+    }, [pokemonList]);
 
     return(
         <section className='content'>
@@ -30,12 +47,7 @@ const Pick = () => {
                 <PokemonCard pokemonName='lucario' moveOne='7' moveTwo='38' moveThree='84' moveFour='41' onclick={value => setPokemonList([...pokemonList, value])}/>
                 <PokemonCard pokemonName='tyranitar' moveOne='31' moveTwo='11' moveThree='33' moveFour='6' onclick={value => setPokemonList([...pokemonList, value])}/>
             </section>
-            <button onClick= {() => {
-                /* if(pokemonList.length > 0) {
-                    handleHistory();
-                } */
-                console.log(pokemonList);
-            }}>Go to welcome</button>
+            <button className='pick-btn' onClick= {handleClick}>Go to welcome</button>
         </section>
     )
 }
