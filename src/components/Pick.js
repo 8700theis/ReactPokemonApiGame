@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import PokemonCard from './PokemonCard';
 import './css/pick.css';
 
@@ -10,12 +10,6 @@ const Pick = () => {
     const handleHistory = () => {
         history.push('/fight');
     }
-
-    /* useEffect(() => {
-        if(pokemonList.length > 0) {
-            console.log(pokemonList);
-        }
-    }, [pokemonList]); */
 
     return(
         <section className='content'>
