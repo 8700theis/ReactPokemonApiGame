@@ -26,8 +26,8 @@ class PokemonCard extends React.Component {
             this.props.onclick(this.state.pokemon);
         } else {
             this.setState({ isClicked: false });
+            this.props.onRemove(this.state.pokemon);
         }
-        
     }
 
     componentDidMount() {
