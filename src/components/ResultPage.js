@@ -12,9 +12,9 @@ const ResultPage = () => {
     }
 
     return(
-        <div class="content-resultpage">
-            <h1 class="content-resultpage-text">Congratz! You Have Defeated The Legendary Pokémon Mewtwo!</h1>
-            <button class="content-resultpage-btn" onClick={handleClick}>Restart</button>
+        <div className="content-resultpage">
+            <h1 className="content-resultpage-text">Congratz! You Have Defeated The Legendary Pokémon Mewtwo!</h1>
+            <button className="content-resultpage-btn" onClick={handleClick}>Restart</button>
         </div>
     )
 }

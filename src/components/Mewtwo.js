@@ -1,24 +1,24 @@
 import grassImage from '../images/grass.png';
 
-const Mewtwo = () => {
+const Mewtwo = (props) => {
     return (
-        <div class="content-fight-top">
+        <div className="content-fight-top">
             <img src={grassImage} alt="Grass"/>
              <section>
-                <div class="content-fight-top-info">
-                    <div class="content-fight-top-info-namelvl">
-                        <p class="pokemon-name" id="boss-name"></p>
-                        <p class="pokemon-lvl" id="boss-lvl"></p>
+                <div className="content-fight-top-info">
+                    <div className="content-fight-top-info-namelvl">
+                        <p className="pokemon-name">{props.mewtwo.name}</p>
+                        <p className="pokemon-lvl">lvl. {props.mewtwo.lvl}</p>
                     </div>
-                    <div class="content-fight-top-info-hp">
-                        <p class="hp-text">HP:</p>
-                        <p class="hp-value" id="boss-hp"></p>
+                    <div className="content-fight-top-info-hp">
+                        <p className="hp-text">HP:</p>
+                        <p className="hp-value">{props.mewtwo.HP}</p>
                     </div>
                 </div>
             </section>
 
-            <div class="content-fight-top-pokemon">
-                <img src="" alt=""/>
+            <div className="content-fight-top-pokemon">
+                <img src={props.mewtwo.imgSprite} alt="Mewtwo"/>
             </div>
         </div>
     )

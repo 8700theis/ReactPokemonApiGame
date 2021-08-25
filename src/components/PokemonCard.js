@@ -77,11 +77,11 @@ class PokemonCard extends React.Component {
             <section className={`flip-card ${this.state.isClicked ? "card-opacity" : ""}`} onMouseEnter={this.handleToggle} onMouseLeave={this.handleToggle}>
                 <section className={`flip-card-inner ${this.state.isActive ? "flip" : ""}`}>
                     <section className='flip-card-front'>
-                        <img src={this.state.pokemon.imgSprite} />
+                        <img src={this.state.pokemon.imgSprite} alt='pokemon'/>
                         <h2>{this.state.name}</h2>
                     </section>
                     <section className='flip-card-back'>
-                        <img src={this.state.pokemon.imgSpriteBack} />
+                        <img src={this.state.pokemon.imgSpriteBack} alt='pokemon'/>
                         <button className='flip-card-button' onClick={this.handleClick}>{this.state.isClicked ? "Remove" : "Add to team"}</button>
                     </section>
                 </section>                

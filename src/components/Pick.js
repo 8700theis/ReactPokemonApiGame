@@ -1,6 +1,7 @@
 import { useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import PokemonCard from './PokemonCard';
+import FetchMewtwo from './FetchMewtwo';
 import './css/pick.css';
 
 const Pick = () => {
@@ -43,6 +44,7 @@ const Pick = () => {
                 <h1>Trainer {localStorage.getItem('trainerName')}, pick up to six Pokémons</h1>
             </article>
             <section className='pokemons'>
+                <FetchMewtwo pokemonName='mewtwo' moveOne='29' moveTwo='17' moveThree='30' moveFour='23'/>
                 <PokemonCard pokemonName='charizard' moveOne='17' moveTwo='37' moveThree='84' moveFour='24' onclick={value => onclickFunction(value)} onRemove={value => onRemoveFunction(value)}/>
                 <PokemonCard pokemonName='machamp' moveOne='32' moveTwo='48' moveThree='16' moveFour='73' onclick={value => onclickFunction(value)} onRemove={value => onRemoveFunction(value)}/>
                 <PokemonCard pokemonName='gengar' moveOne='28' moveTwo='36' moveThree='30' moveFour='21' onclick={value => onclickFunction(value)} onRemove={value => onRemoveFunction(value)}/>
