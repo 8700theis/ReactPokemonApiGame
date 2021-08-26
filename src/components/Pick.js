@@ -6,14 +6,45 @@ import './css/pick.css';
 
 const Pick = () => {
     const [pokemonList, setPokemonList] = useState([]);
+    const [mewtwo, setMewtwo] = useState();
     const history = useHistory();
 
     const handleHistory = () => {
         history.push('/fight');
     }
 
+    const calcHpAndAtt = () => {
+        //Calculating HP and attack
+        let pokemonlist = pokemonList;
+        let hp = 0;
+        pokemonlist.map(pokemon => {
+            let bhs = pokemon.hpBS;
+            let attBs = pokemon.attBS;
+            let movePower = 0;
+            let moveAttackValue = 0
+            let lvl = pokemon.lvl;
+            let mewtwoDefenceBS = mewtwo.defBS;
+            hp = (((2 * bhs + 100) * lvl) / 100) + 41;
+            pokemon.HP = Math.ceil(hp);
+            pokemon.currentHP = Math.ceil(hp);
+            pokemon.moves.map(move => {
+                movePower = move.movePower;
+                if (movePower === null) {
+                    movePower = 0;
+                    moveAttackValue = 0;
+                } else {
+                    moveAttackValue = Math.ceil(((((2 * lvl / 5 + 2) * attBs * movePower) / mewtwoDefenceBS) / 50) + 2);
+                }
+                move.moveDamage = moveAttackValue;
+            });
+        });
+        setPokemonList(pokemonlist);
+    }
+
     const handleClick = () => {
         if(pokemonList.length > 0) {
+            calcHpAndAtt();
+            localStorage.setItem('mewtwo', JSON.stringify(mewtwo));
             localStorage.setItem("trainer-pokemon-list", JSON.stringify(pokemonList));
             handleHistory();
         }
@@ -44,7 +75,7 @@ const Pick = () => {
                 <h1>Trainer {localStorage.getItem('trainerName')}, pick up to six Pokémons</h1>
             </article>
             <section className='pokemons'>
-                <FetchMewtwo pokemonName='mewtwo' moveOne='29' moveTwo='17' moveThree='30' moveFour='23'/>
+                <FetchMewtwo pokemonName='mewtwo' moveOne='29' moveTwo='17' moveThree='30' moveFour='23' setmewtwo={value => setMewtwo(value)}/>
                 <PokemonCard pokemonName='charizard' moveOne='17' moveTwo='37' moveThree='84' moveFour='24' onclick={value => onclickFunction(value)} onRemove={value => onRemoveFunction(value)}/>
                 <PokemonCard pokemonName='machamp' moveOne='32' moveTwo='48' moveThree='16' moveFour='73' onclick={value => onclickFunction(value)} onRemove={value => onRemoveFunction(value)}/>
                 <PokemonCard pokemonName='gengar' moveOne='28' moveTwo='36' moveThree='30' moveFour='21' onclick={value => onclickFunction(value)} onRemove={value => onRemoveFunction(value)}/>

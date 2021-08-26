@@ -48,7 +48,7 @@ const FetchMewtwo = (props) => {
 
                 pokemon = pokemonObject;
 
-                localStorage.setItem('mewtwo', JSON.stringify(pokemon));
+                props.setmewtwo(pokemon);
             })
     return(
         <div />
