@@ -21,16 +21,20 @@ class Fight extends React.Component {
         }
     }
 
+    setStateOfMewtwo = (value) => {
+        this.setState({mewtwo: value});
+    }
+
     render() {
         return(
             <section className='fightcontent'>
                 
                 <div className="content-fight">
-                    <Mewtwo mewtwo={this.state.mewtwo} />
+                    <Mewtwo mewtwo={this.state.mewtwo}  />
                     <div className="content-fight-bottom">
                         <img src={grassImage} alt="Grass image"/>
                         <div className="content-fight-bottom-pokemon">
-                            <img src={this.state.currentPokemon.imgSpriteBack} alt="current pokemon"/>
+                            <img id='currentPokemonImg' src={this.state.currentPokemon.imgSpriteBack} alt="current pokemon"/>
                         </div>
     
                         <section>
@@ -53,7 +57,7 @@ class Fight extends React.Component {
                     </div>
                 </div>
                 
-                <Moves currentpokemon={this.state.currentPokemon} pokemonlist={this.state.pokemonList} mewtwo={this.state.mewtwo}/>
+                <Moves currentpokemon={this.state.currentPokemon} setCurrentpokemon={value => this.setState({currentPokemon: value})} pokemonlist={this.state.pokemonList} setPokemonlist={value => this.setState({pokemonList: value})} mewtwo={this.state.mewtwo} setMewtwo={value => this.setState({mewtwo: value})} />
                 <ResultPage />
             </section>
         )

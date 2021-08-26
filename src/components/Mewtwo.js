@@ -18,7 +18,7 @@ const Mewtwo = (props) => {
             </section>
 
             <div className="content-fight-top-pokemon">
-                <img src={props.mewtwo.imgSprite} alt="Mewtwo"/>
+                <img id='mewtwoImg' src={props.mewtwo.imgSprite} alt="Mewtwo"/>
             </div>
         </div>
     )

@@ -24,16 +24,20 @@ class Moves extends React.Component {
             fightIsClicked: false,
             pokemonlistIsClicked: false,
             myTurn: true,
+            isCurrentPokemonDead: false,
             pokemonList: this.props.pokemonlist,
+            currentPokemon: this.props.currentpokemon,
             mewtwo: this.props.mewtwo
         }
     }
 
     onFightClick = () => {
-        if(this.state.fightIsClicked) {
-            this.setState({ fightIsClicked: false });
-        } else {
-            this.setState({ fightIsClicked: true });
+        if(this.state.isCurrentPokemonDead === false) {
+            if(this.state.fightIsClicked) {
+                this.setState({ fightIsClicked: false });
+            } else {
+                this.setState({ fightIsClicked: true });
+            }
         }
     }
 
@@ -46,16 +50,46 @@ class Moves extends React.Component {
     }
 
     onPokemonInBagClick = () => {
-
+        this.setState({isCurrentPokemonDead: false});
     }
 
-    /* makeMove = (damage) => {
+    mewtwoMakesMove = () => {
+        if(this.state.myTurn === false) {
+            let mewtwoImg = document.querySelector('#mewtwoImg');
+            let currentPokeImg = document.querySelector('#currentPokemonImg');
+            let currentPokemonCopy = this.state.currentPokemon;
+            let pokemonListCopy = [...this.state.pokemonList];
+            let randomNumberGen = Math.floor(Math.random() * 4);
+            currentPokemonCopy.currentHP = currentPokemonCopy.currentHP - this.state.mewtwo.moves[randomNumberGen].moveDamage;
+            if(currentPokemonCopy.currentHP <= 0) {
+                currentPokemonCopy.currentHP = 0;
+                currentPokeImg.classList.add('pokemon-dead');
+                this.setState({isCurrentPokemonDead: true});
+            }
+
+            mewtwoImg.className = 'mewtwoAttack';
+            setTimeout(() => {
+                mewtwoImg.className = '';
+            }, 500);
+            this.setState({currentPokemon: currentPokemonCopy}, () => this.props.setCurrentpokemon(this.state.currentPokemon));
+            this.setState({myTurn: true});
+        }
+    }
+
+    makeMove = (damage) => {
         if(this.state.myTurn) {
+            let currentPokeImg = document.querySelector('#currentPokemonImg');
             let mewtwoCopy = this.state.mewtwo;
             mewtwoCopy.HP = mewtwoCopy.HP - damage;
-            
+            currentPokeImg.className = 'currentAttack';
+            setTimeout(() => {
+                currentPokeImg.className = '';
+            }, 500);
+            this.setState({fightIsClicked: false});
+            this.setState({mewtwo: mewtwoCopy}, () => this.props.setMewtwo(this.state.mewtwo));
+            this.setState({myTurn : false}, () => setTimeout(() => {this.mewtwoMakesMove()}, 1000));
         }
-    } */
+    }
 
     render() {
         return(
@@ -66,22 +100,22 @@ class Moves extends React.Component {
                         <h1 className="content-bottom-left-overlay-heading">What will {this.state.currentPokemonName} do?</h1>
                     </div>
                     <div className="content-bottom-left-moves">
-                        <section className="moves-move-wrapper" onclick={this.makeMove(this.state.currentPokemonMoveOne.moveDamage)}>
+                        <section className="moves-move-wrapper" onClick={() => this.makeMove(this.state.currentPokemonMoveOne.moveDamage)}>
                             <div>
                                 <p className="move">{this.state.currentPokemonMoveOne.moveName}</p>
                             </div>
                         </section>
-                        <section className="moves-move-wrapper" onclick={this.makeMove(this.state.currentPokemonMoveTwo.moveDamage)}>
+                        <section className="moves-move-wrapper" onClick={() => this.makeMove(this.state.currentPokemonMoveTwo.moveDamage)}>
                             <div>
                                 <p className="move">{this.state.currentPokemonMoveTwo.moveName}</p>
                             </div>
                         </section>
-                        <section className="moves-move-wrapper" onclick={this.makeMove(this.state.currentPokemonMoveThree.moveDamage)}>
+                        <section className="moves-move-wrapper" i onClick={() => this.makeMove(this.state.currentPokemonMoveThree.moveDamage)}>
                             <div>
                                 <p className="move">{this.state.currentPokemonMoveThree.moveName}</p>
                             </div>
                         </section>
-                        <section className="moves-move-wrapper" onclick={this.makeMove(this.state.currentPokemonMoveFour.moveDamage)}>
+                        <section className="moves-move-wrapper"  onClick={() => this.makeMove(this.state.currentPokemonMoveFour.moveDamage)}>
                             <div>
                                 <p className="move">{this.state.currentPokemonMoveFour.moveName}</p>
                             </div>
@@ -124,7 +158,6 @@ class Moves extends React.Component {
             </>
         )
     }
-    
 }
 
 export default Moves;
