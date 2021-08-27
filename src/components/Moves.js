@@ -135,7 +135,7 @@ class Moves extends React.Component {
             <div className={`content-pokemon-list ${this.state.pokemonlistIsClicked ? 'show-poke-list' : 'hide-poke-list'}`}>
                 <p className="content-pokemon-list-back-btn" onClick={this.onPokeBagClick}>Back</p>
 
-                {this.state.pokemonList.map((pokemon) =>  
+                {this.state.pokemonList.map(pokemon =>
                     <div className="content-pokemon-list-item" onClick={this.onPokemonInBagClick}>
                         <img src={pokemon.imgSprite} alt="pokemon"/>
                         <div className="content-pokemon-list-item-info">

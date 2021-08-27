@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 //Components import
 import Moves from './Moves';
@@ -21,10 +21,6 @@ class Fight extends React.Component {
         }
     }
 
-    setStateOfMewtwo = (value) => {
-        this.setState({mewtwo: value});
-    }
-
     render() {
         return(
             <section className='fightcontent'>
@@ -45,7 +41,6 @@ class Fight extends React.Component {
                                 </div>
                                 <div className="content-fight-bottom-info-hp">
                                     <p className="hp-text">HP</p>
-                                    <h1></h1>
                                     <div>
                                         <p className="hp-value">{this.state.currentPokemon.currentHP}</p>
                                         <p className="hp-value"> / </p>

@@ -17,7 +17,7 @@ const Pick = () => {
         //Calculating HP and attack
         let pokemonlist = pokemonList;
         let hp = 0;
-        pokemonlist.map(pokemon => {
+        pokemonlist.forEach(pokemon => {
             let bhs = pokemon.hpBS;
             let attBs = pokemon.attBS;
             let movePower = 0;
@@ -27,7 +27,7 @@ const Pick = () => {
             hp = (((2 * bhs + 100) * lvl) / 100) + 41;
             pokemon.HP = Math.ceil(hp);
             pokemon.currentHP = Math.ceil(hp);
-            pokemon.moves.map(move => {
+            pokemon.moves.forEach(move => {
                 movePower = move.movePower;
                 if (movePower === null) {
                     movePower = 0;
@@ -89,7 +89,7 @@ const Pick = () => {
                 <PokemonCard pokemonName='lucario' moveOne='7' moveTwo='38' moveThree='84' moveFour='41' onclick={value => onclickFunction(value)} onRemove={value => onRemoveFunction(value)}/>
                 <PokemonCard pokemonName='tyranitar' moveOne='31' moveTwo='11' moveThree='33' moveFour='6' onclick={value => onclickFunction(value)} onRemove={value => onRemoveFunction(value)}/>
             </section>
-            <button className='pick-btn' onClick={handleClick}>Go to welcome</button>
+            <button className='pick-btn' onClick={handleClick}>Go to battle</button>
         </section>
     )
 }

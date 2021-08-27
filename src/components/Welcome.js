@@ -6,13 +6,14 @@ const Welcome = () => {
     const [trainerName, setTrainerName] = useState('');
     const history = useHistory();
 
-    const handleHistory = () => {
-        history.push('/pick');
-    }
+    
 
     useEffect(() => {
         if(trainerName !== '') {
             localStorage.setItem('trainerName', trainerName);
+            const handleHistory = () => {
+                history.push('/pick');
+            }
             handleHistory();
         }
     }, [trainerName]);
